@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @event.name %>
+</p>
+
+<p>
+  <strong>Event date:</strong>
+  <%= @event.event_date %>
+</p>
+
+<p>
+  <strong>Create dt tm:</strong>
+  <%= @event.create_dt_tm %>
+</p>
+
+<p>
+  <strong>Fee:</strong>
+  <% if @user%>
+  <%= @event.fee %>
+</p>
+
+
+
+<%= link_to 'Back', events_path %> |
+<%if user_signed_in? %>
+  <%= link_to'Logout', destroy_user_session_path, method: :delete%> |
+  <input type="checkbox" value="1"><span>Attend</span>
+<% else%>
+  <%= link_to 'Register', new_user_registration_path %> |
+  <%= link_to 'Login', new_user_session_path %>
+
+
+<%end %>
