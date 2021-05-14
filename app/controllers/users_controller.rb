@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[show edit update destroy]
+  after_action :set_user_for_login
 
   # GET /users or /users.json
   def index
@@ -78,5 +79,15 @@ class UsersController < ApplicationController
         format.json { render :'events/index', status: :ok }
       end
     end
-  end
+    end
+
+    def set_user_for_login
+      if params[:id] == "sign_in"
+        sign_in @user
+        respond_to do |format|
+          format.html { redirect_to events_path, notice: "User was successfully logged in." }
+          format.json { render :'events/index', status: :ok }
+        end
+      end
+      end
 end
