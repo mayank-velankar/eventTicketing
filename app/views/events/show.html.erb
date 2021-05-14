@@ -17,7 +17,13 @@
 
 <p>
   <strong>Fee:</strong>
-  <%= @event.fee %>
+   <% if @gender == "female"  %>
+    <%= @price%>
+    <% else %>
+    <%= @event.fee%>
+    <%= @gender %>
+    <%end %>
+
 </p>
 
 

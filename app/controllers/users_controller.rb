@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 
   # GET /users/1 or /users/1.json
   def show
-    @users = User.find_by_name(user.name)
+    @user = User.find_by(id: params[:id])
   end
 
   # GET /users/new
@@ -61,8 +61,7 @@ class UsersController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_user
-    if params[:id] == "sign_out"
-      sign_out(user_url)
+    if self.params[:id] == "sign_out"
     end
     @user = User.find(params[:id])
   end
