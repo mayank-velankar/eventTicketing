@@ -61,13 +61,22 @@ class UsersController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_user
-    if self.params[:id] == "sign_out"
-    end
     @user = User.find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.
   def user_params
     params.require(:user).permit(:name, :email, :password_digest, :gender)
+  end
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_user
+    if params[:id] == "sign_out"
+      sign_out @user
+      respond_to do |format|
+        format.html { redirect_to events_path, notice: "User was successfully logged out." }
+        format.json { render :'events/index', status: :ok }
+      end
+    end
   end
 end

@@ -1,5 +1,5 @@
 class Event < ApplicationRecord
-  belongs_to :user, inverse_of: :user
+  belongs_to :user, :optional => true
 
   before_create :set_foo_to_now
   def set_foo_to_now
