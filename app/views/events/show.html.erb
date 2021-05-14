@@ -16,22 +16,25 @@
 </p>
 
 <p>
-  <strong>Fee:</strong>
-   <% if @gender == "female"  %>
-    <%= @price%>
+  <%if user_signed_in? %>
+    <strong>Fee:</strong>
+    <% if current_user[:gender] == "female"  %>
+      <%= show_discount_price %>
     <% else %>
-    <%= @event.fee%>
-    <%= @gender %>
+      <%= @event.fee%>
     <%end %>
-
+  <%end %>
 </p>
 
+<p> Check others who are attending </p>
 
 
 <%= link_to 'Back', events_path %> |
 <%if user_signed_in? %>
   <%= link_to'Logout', destroy_user_session_path, method: :delete%> |
+  <%if @event.event_date >= Date.current %>
   <input type="checkbox" value="1"><span>Attend</span>
+    <%end %>
 <% else%>
   <%= link_to 'Register', new_user_registration_path %> |
   <%= link_to 'Login', new_user_session_path %>
